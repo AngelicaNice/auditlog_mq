@@ -1,0 +1,9 @@
+mq:
+  name: logs
+  url: amqp://guest:guest@hollywoodstarscrud-amqp_container-1/
+
+db:
+  dbname: database
+  uri: mongodb://mongo_container:27017
+  username: admin
+  password: mongo

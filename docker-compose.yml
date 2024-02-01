@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  app:
+    restart: always
+    build: ./
+    command: ./app
+    networks:
+      - my-proxy-net
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo_container
+
+  mongo_container:
+    restart: always
+    image: mongo:latest
+    networks:
+      - my-proxy-net
+    volumes:
+      - ./data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    ports:
+      - "27017:27017"
+
+networks:
+  my-proxy-net:
+    name: microservice_network
+    external: true
